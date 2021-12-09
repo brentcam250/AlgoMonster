@@ -2,7 +2,7 @@ from collections import deque
 def valid_parentheses(s: str) -> bool:
     # WRITE YOUR BRILLIANT CODE HERE
     stack = []
-    pairs = { ')': '(', '}': '{', '[' : ']'}
+    pairs = { ')': '(', '}': '{', ']' : ']'}
     for char in s:
       if char in pairs: 
         if (len(stack) > 0) and (stack[-1] == pairs[char]):
