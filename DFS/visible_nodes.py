@@ -7,21 +7,20 @@ class Node:
 def visible_tree_node(root: Node) -> int:
     # WRITE YOUR BRILLIANT CODE HERE
 
-
-    def dfs(root, max):
-      if max is None: 
-        max = root.val
+    def dfs(root, max_yet):
       if root is None:
         return 0
 
-      if root.val > max:
-          max = root.val
-          return sum([dfs(root.left, max), dfs(root.right, max)]) # dont add one because this node isnt "visible"
-    
-      else: 
-          return sum([dfs(root.left, max), dfs(root.right, max),1])
+      total = 0
+      if root.val >= max_yet:
+            total+=1
+      total += dfs(root.left, max(root.val, max_yet))
+      total += dfs(root.right, max(root.val, max_yet))
 
-    return dfs(root, None)
+
+
+      return total
+    return dfs(root, -float('inf'))
 
 def build_tree(nodes, f):
     val = next(nodes)
@@ -34,3 +33,4 @@ if __name__ == '__main__':
     root = build_tree(iter(input().split()), int)
     res = visible_tree_node(root)
     print(res)
+
